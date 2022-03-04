@@ -3,7 +3,9 @@ const subtract = (num1, num2) => num1 - num2;
 const multiply = (num1, num2) => num1 * num2;
 const divide = (num1, num2) => num1 / num2;
 const display = document.querySelector('.display');
+const equalBtn = document.querySelector('.equal');
 var displayValue;
+
 const operate = (num1, operator, num2) => {
     switch (operator) {
         case '+':
@@ -50,10 +52,18 @@ operators.forEach(operator => {
         if (isFullOperation(previousOperation)) {
             previousOperation = previousOperation.split(' ');
             var result = operate(previousOperation[0], previousOperation[1], previousOperation[2]);
-            console.log(typeof(previousOperation));
             result += ` ${displayValue[displayValue.length -2]} `;
             clearDisplay();
             drawToDisplay(result);
         }
     })
+})
+
+equalBtn.addEventListener('click', e => {
+    if (isFullOperation(displayValue)) {
+        var result = displayValue.split(' ');
+        result = operate(result[0], result[1], result[2]);
+        clearDisplay();
+        drawToDisplay(result);
+    }
 })
