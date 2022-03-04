@@ -4,6 +4,8 @@ const multiply = (num1, num2) => num1 * num2;
 const divide = (num1, num2) => num1 / num2;
 const display = document.querySelector('.display');
 const equalBtn = document.querySelector('.equal');
+const digitBtn = document.querySelectorAll('.digit');
+const clearBtn = document.querySelector('.reset');
 var displayValue;
 
 const operate = (num1, operator, num2) => {
@@ -27,7 +29,7 @@ const drawToDisplay = (operand) => {
     displayValue = display.textContent;
 }
 
-const digitBtn = document.querySelectorAll('.digit');
+
 digitBtn.forEach(btn => {
     btn.addEventListener('click', e => {
         drawToDisplay(e.target.innerText)
@@ -59,11 +61,16 @@ operators.forEach(operator => {
     })
 })
 
-equalBtn.addEventListener('click', e => {
+equalBtn.addEventListener('click', () => {
     if (isFullOperation(displayValue)) {
         var result = displayValue.split(' ');
         result = operate(result[0], result[1], result[2]);
         clearDisplay();
         drawToDisplay(result);
     }
+})
+
+clearBtn.addEventListener('click', () => {
+    clearDisplay();
+    displayValue = '';
 })
